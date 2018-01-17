@@ -17,12 +17,19 @@ namespace BillingRecord.Controllers
 		[ChildActionOnly]
 		public ActionResult RecordList()
 		{
-			var model = new BillingInfoViewModel()
+			List<BillingInfoViewModel> testData = new List<BillingInfoViewModel>();
+			var singleRecord = new BillingInfoViewModel()
 			{
 				Type = "Expense",
 				Amount = 1000,
 				Date = "2018.01.17",
 				Message = "Eat"
+			};
+			testData.Add(singleRecord);
+
+			var model = new BillingRecordViewModel()
+			{
+				RecordList = testData
 			};
 			return View(model);
 		}

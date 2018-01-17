@@ -2,7 +2,7 @@
 	ViewBag.Title = "RecordList";
 	Layout = null;
 }
-@model BillingRecord.Models.ViewModels.BillingInfoViewModel
+@model BillingRecord.Models.ViewModels.BillingRecordViewModel
 
 <div class="row">
 	<div class="col-md-12">
@@ -13,24 +13,16 @@
 				<th>日期</th>
 				<th>金額</th>
 			</tr>
-			<tr>
-				<td>1</td>
-				<td>@Model.Type</td>
-				<td>@Model.Date</td>
-				<td>@Model.Amount</td>
-			</tr>
-			<tr>
-				<td>2</td>
-				<td>支出</td>
-				<td>2016-01-02</td>
-				<td>1,600</td>
-			</tr>
-			<tr>
-				<td>3</td>
-				<td>支出</td>
-				<td>2016-01-03</td>
-				<td>8,00</td>
-			</tr>
+			@{var index = 0;}
+			@foreach (var record in Model.RecordList)
+			{
+				<tr>
+					<td>@(++index)</td>
+					<td>@record.Type</td>
+					<td>@record.Date</td>
+					<td>@record.Amount</td>
+				</tr>
+			}
 		</table>
 	</div>
 </div>
