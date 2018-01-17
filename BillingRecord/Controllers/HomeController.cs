@@ -18,14 +18,22 @@ namespace BillingRecord.Controllers
 		public ActionResult RecordList()
 		{
 			List<BillingInfoViewModel> testData = new List<BillingInfoViewModel>();
-			var singleRecord = new BillingInfoViewModel()
+
+			string[] billingType = { "支出", "收入" };
+			string[] messageName = { "伙食", "購物", "房租", "水電瓦斯", "網路電話", "交通", "休閒娛樂", "送禮請客" };
+
+			Random rnd = new Random();
+			for (int i = 0; i < 200; ++i)
 			{
-				Type = "Expense",
-				Amount = 1000,
-				Date = "2018.01.17",
-				Message = "Eat"
-			};
-			testData.Add(singleRecord);
+				var singleRecord = new BillingInfoViewModel()
+				{
+					Type = billingType[rnd.Next(0, 2)],
+					Amount = rnd.Next(100, 1000),
+					Date = "2017." + rnd.Next(1, 13) + "." + rnd.Next(1, 31),
+					Message = messageName[rnd.Next(0, 8)]
+				};
+				testData.Add(singleRecord);
+			}
 
 			var model = new BillingRecordViewModel()
 			{
