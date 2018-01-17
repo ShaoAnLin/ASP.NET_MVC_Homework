@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BillingRecord.Models.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -16,7 +17,14 @@ namespace BillingRecord.Controllers
 		[ChildActionOnly]
 		public ActionResult RecordList()
 		{
-			return View();
+			var model = new BillingInfoViewModel()
+			{
+				Type = "Expense",
+				Amount = 1000,
+				Date = "2018.01.17",
+				Message = "Eat"
+			};
+			return View(model);
 		}
 
 		public ActionResult About()

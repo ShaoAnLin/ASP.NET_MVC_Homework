@@ -2,6 +2,7 @@
 	ViewBag.Title = "RecordList";
 	Layout = null;
 }
+@model BillingRecord.Models.ViewModels.BillingInfoViewModel
 
 <div class="row">
 	<div class="col-md-12">
@@ -14,9 +15,9 @@
 			</tr>
 			<tr>
 				<td>1</td>
-				<td>支出</td>
-				<td>2016-01-01</td>
-				<td>300</td>
+				<td>@Model.Type</td>
+				<td>@Model.Date</td>
+				<td>@Model.Amount</td>
 			</tr>
 			<tr>
 				<td>2</td>
