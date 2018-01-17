@@ -13,6 +13,12 @@ namespace BillingRecord.Controllers
 			return View();
 		}
 
+		[ChildActionOnly]
+		public ActionResult RecordList()
+		{
+			return View();
+		}
+
 		public ActionResult About()
 		{
 			ViewBag.Message = "Your application description page.";
