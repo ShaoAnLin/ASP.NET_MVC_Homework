@@ -9,6 +9,9 @@ namespace BillingRecord.Controllers
 {
 	public class HomeController : Controller
 	{
+		private Random RandomGen = new Random();
+		private DateTime StartDate = new DateTime(2010, 1, 1);
+
 		public ActionResult Index()
 		{
 			return View();
@@ -21,20 +24,25 @@ namespace BillingRecord.Controllers
 
 			string[] billingType = { "支出", "收入" };
 			string[] messageName = { "伙食", "購物", "房租", "水電瓦斯", "網路電話", "交通", "休閒娛樂", "送禮請客" };
-
-			Random rnd = new Random();
+			
 			for (int i = 0; i < 200; ++i)
 			{
 				var singleRecord = new BillingInfoViewModel()
 				{
-					Type = billingType[rnd.Next(0, 2)],
-					Amount = rnd.Next(100, 1000),
-					Date = "2017." + rnd.Next(1, 13) + "." + rnd.Next(1, 31),
-					Message = messageName[rnd.Next(0, 8)]
+					Type = billingType[RandomGen.Next(0, 2)],
+					Amount = RandomGen.Next(100, 1000),
+					Date = RandomDateTime(),
+					Message = messageName[RandomGen.Next(0, 8)]
 				};
 				testData.Add(singleRecord);
 			}
 			return View(testData);
+		}
+
+		public DateTime RandomDateTime()
+		{
+			int range = ((TimeSpan)(DateTime.Today - StartDate)).Days;
+			return StartDate.AddDays(RandomGen.Next(range));
 		}
 
 		public ActionResult About()
