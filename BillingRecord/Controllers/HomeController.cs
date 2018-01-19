@@ -34,12 +34,7 @@ namespace BillingRecord.Controllers
 				};
 				testData.Add(singleRecord);
 			}
-
-			var model = new BillingRecordViewModel()
-			{
-				RecordList = testData
-			};
-			return View(model);
+			return View(testData);
 		}
 
 		public ActionResult About()

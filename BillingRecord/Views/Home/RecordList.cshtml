@@ -2,7 +2,7 @@
 	ViewBag.Title = "RecordList";
 	Layout = null;
 }
-@model BillingRecord.Models.ViewModels.BillingRecordViewModel
+@model List<BillingRecord.Models.ViewModels.BillingInfoViewModel>
 
 <div class="row">
 	<div class="col-md-12">
@@ -14,7 +14,7 @@
 				<th>金額</th>
 			</tr>
 			@{var index = 0;}
-			@foreach (var record in Model.RecordList)
+			@foreach (var record in Model)
 			{
 				<tr>
 					<td>@(++index)</td>
