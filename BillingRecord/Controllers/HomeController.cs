@@ -1,4 +1,5 @@
-﻿using BillingRecord.Models.ViewModels;
+﻿using BillingRecord.Models;
+using BillingRecord.Models.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,8 +10,7 @@ namespace BillingRecord.Controllers
 {
 	public class HomeController : Controller
 	{
-		private Random RandomGen = new Random();
-		private DateTime StartDate = new DateTime(2010, 1, 1);
+		private BillingDatabaseEntities db = new BillingDatabaseEntities();
 
 		public ActionResult Index()
 		{
@@ -20,29 +20,15 @@ namespace BillingRecord.Controllers
 		[ChildActionOnly]
 		public ActionResult RecordList()
 		{
-			List<BillingInfoViewModel> testData = new List<BillingInfoViewModel>();
-
-			string[] billingType = { "支出", "收入" };
-			string[] messageName = { "伙食", "購物", "房租", "水電瓦斯", "網路電話", "交通", "休閒娛樂", "送禮請客" };
-			
-			for (int i = 0; i < 200; ++i)
+			List<BillingInfoViewModel> model = db.AccountBook.Take(200).Select(d => new BillingInfoViewModel()
 			{
-				var singleRecord = new BillingInfoViewModel()
-				{
-					Type = billingType[RandomGen.Next(0, 2)],
-					Amount = RandomGen.Next(100, 1000),
-					Date = RandomDateTime(),
-					Message = messageName[RandomGen.Next(0, 8)]
-				};
-				testData.Add(singleRecord);
-			}
-			return View(testData);
-		}
-
-		public DateTime RandomDateTime()
-		{
-			int range = ((TimeSpan)(DateTime.Today - StartDate)).Days;
-			return StartDate.AddDays(RandomGen.Next(range));
+				Type = (d.Categoryyy == 0) ? "支出" : "收入",
+				Amount = d.Amounttt,
+				Date = d.Dateee,
+				Message = d.Remarkkk
+			}).ToList();
+			
+			return View(model);
 		}
 
 		public ActionResult About()
