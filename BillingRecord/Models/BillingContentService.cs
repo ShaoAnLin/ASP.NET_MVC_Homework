@@ -1,4 +1,5 @@
 ﻿using BillingRecord.Models.ViewModels;
+using ServiceLab.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,16 +9,19 @@ namespace BillingRecord.Models
 {
 	public class BillingContentService
 	{
-		private readonly BillingDatabaseEntities _db;
+		private readonly IUnitOfWork _unitOfWork;
+		private readonly IRepository<AccountBook> _billingRep;
 
-		public BillingContentService()
+		public BillingContentService(IUnitOfWork unitOfWork)
 		{
-			_db = new BillingDatabaseEntities();
+			_unitOfWork = unitOfWork;
+			_billingRep = new Repository<AccountBook>(unitOfWork);
 		}
 
 		public List<BillingInfoViewModel> GetRecords(int num)
 		{
-			List<BillingInfoViewModel> model = _db.AccountBook.Take(num).Select(d => new BillingInfoViewModel()
+			var source = _billingRep.LookupAll();
+			var model = source.Take(num).Select(d => new BillingInfoViewModel()
 			{
 				Type = (d.Categoryyy == 0) ? "支出" : "收入",
 				Amount = d.Amounttt,

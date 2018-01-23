@@ -1,4 +1,5 @@
 ﻿using BillingRecord.Models;
+using ServiceLab.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,11 +10,13 @@ namespace BillingRecord.Controllers
 {
 	public class HomeController : Controller
 	{
+		private readonly EFUnitOfWork _unitOfWork;
 		private readonly BillingContentService _contectSvc;
 
 		public HomeController()
 		{
-			_contectSvc = new BillingContentService();
+			_unitOfWork = new EFUnitOfWork();
+			_contectSvc = new BillingContentService(_unitOfWork);
 		}
 
 		public ActionResult Index()
