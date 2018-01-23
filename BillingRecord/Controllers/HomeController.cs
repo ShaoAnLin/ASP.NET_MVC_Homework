@@ -1,5 +1,4 @@
 ﻿using BillingRecord.Models;
-using BillingRecord.Models.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +9,12 @@ namespace BillingRecord.Controllers
 {
 	public class HomeController : Controller
 	{
-		private BillingDatabaseEntities db = new BillingDatabaseEntities();
+		private readonly BillingContentService _contectSvc;
+
+		public HomeController()
+		{
+			_contectSvc = new BillingContentService();
+		}
 
 		public ActionResult Index()
 		{
@@ -19,16 +23,8 @@ namespace BillingRecord.Controllers
 
 		[ChildActionOnly]
 		public ActionResult RecordList()
-		{
-			List<BillingInfoViewModel> model = db.AccountBook.Take(200).Select(d => new BillingInfoViewModel()
-			{
-				Type = (d.Categoryyy == 0) ? "支出" : "收入",
-				Amount = d.Amounttt,
-				Date = d.Dateee,
-				Message = d.Remarkkk
-			}).ToList();
-			
-			return View(model);
+		{	
+			return View(_contectSvc.GetRecords(200));
 		}
 
 		public ActionResult About()
