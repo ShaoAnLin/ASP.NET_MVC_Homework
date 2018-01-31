@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using static BillingRecord.Models.ViewModels.BillingInfoViewModel;
 
 namespace BillingRecord.Models
 {
@@ -23,7 +24,7 @@ namespace BillingRecord.Models
 			var source = _billingRep.LookupAll();
 			var model = source.Take(num).Select(d => new BillingInfoViewModel()
 			{
-				Type = (d.Categoryyy == 0) ? "支出" : "收入",
+				Type = (BillingType)d.Categoryyy,
 				Amount = d.Amounttt,
 				Date = d.Dateee,
 				Message = d.Remarkkk

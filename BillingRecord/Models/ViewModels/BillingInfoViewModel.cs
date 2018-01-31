@@ -7,7 +7,12 @@ namespace BillingRecord.Models.ViewModels
 {
 	public class BillingInfoViewModel
 	{
-		public string Type { get; set; }
+		public enum BillingType
+		{
+			Expense = 0,
+			Income = 1
+		}
+		public BillingType Type { get; set; }
 		public int Amount { get; set; }
 		public DateTime Date { get; set; }
 		public string Message { get; set; }
