@@ -2,7 +2,21 @@
 	ViewBag.Title = "RecordList";
 	Layout = null;
 }
-@model List<BillingRecord.Models.ViewModels.BillingInfoViewModel>
+
+@using BillingRecord.Models.ViewModels
+@model List<BillingInfoViewModel>
+
+@helper BillingType(BillingInfoViewModel.BillingType type)
+{
+	if (type == BillingInfoViewModel.BillingType.Income)
+	{
+		<td style="color:blue">@type</td>
+	}
+	else
+	{
+		<td style="color:red">@type</td>
+	}
+}
 
 <div class="row">
 	<div class="col-md-12">
@@ -18,7 +32,7 @@
 			{
 				<tr>
 					<td>@(++index)</td>
-					<td>@record.Type</td>
+					@BillingType(record.Type)
 					<td>@record.Date.ToString("yyyy.MM.dd")</td>
 					<td>@record.Amount</td>
 				</tr>
