@@ -32,5 +32,21 @@ namespace BillingRecord.Models
 
 			return model;
 		}
+
+		public void Add(BillingInfoViewModel model)
+		{
+			_billingRep.Create(new AccountBook {
+				Id = Guid.NewGuid(),
+				Categoryyy = (int)model.Type,
+				Amounttt = (int)model.Amount,
+				Dateee = model.Date,
+				Remarkkk = model.Message
+			});
+		}
+
+		public void Save()
+		{
+			_unitOfWork.Save();
+		}
 	}
 }

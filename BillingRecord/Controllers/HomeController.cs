@@ -12,12 +12,12 @@ namespace BillingRecord.Controllers
 	public class HomeController : Controller
 	{
 		private readonly EFUnitOfWork _unitOfWork;
-		private readonly BillingContentService _contectSvc;
+		private readonly BillingContentService _contentSvc;
 
 		public HomeController()
 		{
 			_unitOfWork = new EFUnitOfWork();
-			_contectSvc = new BillingContentService(_unitOfWork);
+			_contentSvc = new BillingContentService(_unitOfWork);
 		}
 
 		public ActionResult Index()
@@ -28,13 +28,15 @@ namespace BillingRecord.Controllers
 		[HttpPost]
 		public ActionResult Index(BillingInfoViewModel model)
 		{
+			_contentSvc.Add(model);
+			_contentSvc.Save();
 			return View();
 		}
 
 		[ChildActionOnly]
 		public ActionResult RecordList()
 		{	
-			return View(_contectSvc.GetRecords(200));
+			return View(_contentSvc.GetRecords(200));
 		}
 
 		public ActionResult About()
