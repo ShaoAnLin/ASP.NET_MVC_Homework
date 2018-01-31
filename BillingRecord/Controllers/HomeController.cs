@@ -28,9 +28,13 @@ namespace BillingRecord.Controllers
 		[HttpPost]
 		public ActionResult Index(BillingInfoViewModel model)
 		{
-			_contentSvc.Add(model);
-			_contentSvc.Save();
-			return View();
+            if (ModelState.IsValid)
+			{
+				_contentSvc.Add(model);
+				_contentSvc.Save();
+				return View();
+            }
+            return View(model);
 		}
 
 		[ChildActionOnly]

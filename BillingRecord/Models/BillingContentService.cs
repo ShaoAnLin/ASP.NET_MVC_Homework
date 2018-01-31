@@ -38,7 +38,7 @@ namespace BillingRecord.Models
 			_billingRep.Create(new AccountBook {
 				Id = Guid.NewGuid(),
 				Categoryyy = (int)model.Type,
-				Amounttt = (int)model.Amount,
+				Amounttt = model.Amount,
 				Dateee = model.Date,
 				Remarkkk = model.Message
 			});
