@@ -1,4 +1,5 @@
-﻿
+﻿@model BillingRecord.Models.ViewModels.BillingInfoViewModel
+
 @using (Html.BeginForm())
 {
 	<div class="container body-content">
@@ -6,30 +7,25 @@
 			<div class="form-group">
 				<label for="category" class="col-sm-2 control-label">類別</label>
 				<div class="col-sm-10">
-					<select id="category" class="form-control">
-						<option value="" selected>請選擇</option>
-						<option>支出</option>
-						<option>收入</option>
-					</select>
+					@Html.EnumDropDownListFor(e=>e.Type, new { @class="form-control"})
 				</div>
 			</div>
 			<div class="form-group">
 				<label for="money" class="col-sm-2 control-label">金額</label>
 				<div class="col-sm-10">
-					<input type="text" class="form-control" id="money" placeholder="金額">
+					@Html.TextBoxFor(e=>e.Amount, new { @class="form-control", placeholder="金額" })
 				</div>
 			</div>
 			<div class="form-group">
 				<label for="date" class="col-sm-2 control-label">日期</label>
 				<div class="col-sm-10">
-					<input type="text" class="form-control" id="date" placeholder="日期">
+					@Html.TextBoxFor(e => e.Date, new { @class = "form-control", placeholder = "日期" })
 				</div>
 			</div>
 			<div class="form-group">
 				<label for="description" class="col-sm-2 control-label">備註</label>
 				<div class="col-sm-10">
-					<textarea class="form-control" id="description">
-                </textarea>
+					@Html.TextAreaFor(e => e.Message, new { @class = "form-control"})
 				</div>
 			</div>
 			<div class="form-group">

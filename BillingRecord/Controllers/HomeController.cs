@@ -1,4 +1,5 @@
 ﻿using BillingRecord.Models;
+using BillingRecord.Models.ViewModels;
 using ServiceLab.Repositories;
 using System;
 using System.Collections.Generic;
@@ -20,6 +21,12 @@ namespace BillingRecord.Controllers
 		}
 
 		public ActionResult Index()
+		{
+			return View(new BillingInfoViewModel());
+		}
+		
+		[HttpPost]
+		public ActionResult Index(BillingInfoViewModel model)
 		{
 			return View();
 		}
