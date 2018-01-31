@@ -13,7 +13,7 @@ namespace BillingRecord.Models.ViewModels
 			Income = 1
 		}
 		public BillingType Type { get; set; }
-		public int Amount { get; set; }
+		public Decimal Amount { get; set; }
 		public DateTime Date { get; set; }
 		public string Message { get; set; }
 	}
