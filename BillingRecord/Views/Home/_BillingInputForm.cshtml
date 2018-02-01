@@ -1,6 +1,6 @@
 ﻿@model BillingRecord.Models.ViewModels.BillingInfoViewModel
 
-@using (Html.BeginForm())
+@using (Ajax.BeginForm(new AjaxOptions { }))
 {
 	@Html.AntiForgeryToken()
 	@Html.ValidationSummary(true)
