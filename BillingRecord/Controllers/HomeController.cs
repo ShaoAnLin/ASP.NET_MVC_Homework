@@ -40,7 +40,7 @@ namespace BillingRecord.Controllers
 		[ChildActionOnly]
 		public ActionResult RecordList()
 		{	
-			return View(_contentSvc.GetRecords(200));
+			return View(_contentSvc.GetRecords());
 		}
 
 		public ActionResult About()

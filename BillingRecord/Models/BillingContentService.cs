@@ -19,10 +19,9 @@ namespace BillingRecord.Models
 			_billingRep = new Repository<AccountBook>(unitOfWork);
 		}
 
-		public List<BillingInfoViewModel> GetRecords(int num)
+		public List<BillingInfoViewModel> GetRecords(int num = 100)
 		{
-			var source = _billingRep.LookupAll();
-			var model = source.Take(num).Select(d => new BillingInfoViewModel()
+			var model = _billingRep.LookupAll().Take(num).Select(d => new BillingInfoViewModel()
 			{
 				Type = (BillingType)d.Categoryyy,
 				Amount = d.Amounttt,
