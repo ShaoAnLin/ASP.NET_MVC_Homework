@@ -21,7 +21,7 @@ namespace BillingRecord.Models
 
 		public List<BillingInfoViewModel> GetRecords(int num = 100)
 		{
-			var model = _billingRep.LookupAll().Take(num).Select(d => new BillingInfoViewModel()
+			var model = _billingRep.LookupAll().OrderByDescending(d => d.Dateee).Take(num).Select(d => new BillingInfoViewModel()
 			{
 				Type = (BillingType)d.Categoryyy,
 				Amount = d.Amounttt,
