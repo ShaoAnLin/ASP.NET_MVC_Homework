@@ -28,7 +28,7 @@ namespace BillingRecord.Models.ViewModels
 
 		[Required]
 		[Display(Name = "備註")]
-		[StringLength(100, ErrorMessage="請勿超過100字")]
+		[StringLength(100, ErrorMessage="請勿超過{1}字")]
 		public string Message { get; set; }
 	}
 }
