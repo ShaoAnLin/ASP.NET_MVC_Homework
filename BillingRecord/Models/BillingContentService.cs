@@ -43,6 +43,23 @@ namespace BillingRecord.Models
 			});
 		}
 
+		public bool ModelIsValid(BillingInfoViewModel model)
+		{
+			if (model.Amount < 0)
+			{
+				return false;
+			}
+			if (model.Date > DateTime.Now)
+			{
+				return false;
+			}
+			if (model.Message.Length > 100)
+			{
+				return false;
+			}
+			return true;
+		}
+
 		public void Save()
 		{
 			_unitOfWork.Save();

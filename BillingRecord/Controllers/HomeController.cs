@@ -30,9 +30,12 @@ namespace BillingRecord.Controllers
 		{
             if (ModelState.IsValid)
 			{
-				_contentSvc.Add(model);
-				_contentSvc.Save();
-				return View();
+				if (_contentSvc.ModelIsValid(model))
+				{
+					_contentSvc.Add(model);
+					_contentSvc.Save();
+					return RedirectToAction("Index", "Home");
+				}
             }
             return View(model);
 		}
