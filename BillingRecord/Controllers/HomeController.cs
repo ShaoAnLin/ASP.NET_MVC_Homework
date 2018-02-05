@@ -26,7 +26,7 @@ namespace BillingRecord.Controllers
 		}
 		
 		[HttpPost]
-		public ActionResult Index(BillingInfoViewModel model)
+		public ActionResult Create(BillingInfoViewModel model)
 		{
             if (ModelState.IsValid)
 			{
@@ -34,10 +34,10 @@ namespace BillingRecord.Controllers
 				{
 					_contentSvc.Add(model);
 					_contentSvc.Save();
-					return RedirectToAction("Index", "Home");
+					return View(_contentSvc.GetRecords());
 				}
-            }
-            return View(model);
+			}
+			return View(model);
 		}
 
 		[ChildActionOnly]
