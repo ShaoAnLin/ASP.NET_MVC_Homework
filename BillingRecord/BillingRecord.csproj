@@ -194,9 +194,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201802061052348_InitialCreate.cs" />
-    <Compile Include="Migrations\201802061052348_InitialCreate.Designer.cs">
-      <DependentUpon>201802061052348_InitialCreate.cs</DependentUpon>
+    <Compile Include="Migrations\201802071101533_init.cs" />
+    <Compile Include="Migrations\201802071101533_init.Designer.cs">
+      <DependentUpon>201802071101533_init.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBook.cs" />
@@ -210,6 +210,10 @@
     <Compile Include="Repositories\Repository.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\aspnet-account-BillingRecord.mdf" />
+    <Content Include="App_Data\aspnet-account-BillingRecord_log.ldf">
+      <DependentUpon>aspnet-account-BillingRecord.mdf</DependentUpon>
+    </Content>
     <Content Include="App_Data\SkillTreeHomework.mdf" />
     <Content Include="App_Data\SkillTreeHomework_log.ldf">
       <DependentUpon>SkillTreeHomework.mdf</DependentUpon>
@@ -296,8 +300,8 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201802061052348_InitialCreate.resx">
-      <DependentUpon>201802061052348_InitialCreate.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201802071101533_init.resx">
+      <DependentUpon>201802071101533_init.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
