@@ -41,9 +41,30 @@ namespace BillingRecord.Controllers
 		}
 
 		[ChildActionOnly]
-		public ActionResult RecordList()
-		{	
+		public ActionResult RecordList(bool editMode = false)
+		{
+			ViewBag.EditMode = editMode;
 			return View(_contentSvc.GetRecords());
+		}
+
+		public ActionResult Manage()
+		{
+			return View();
+		}
+
+		public ActionResult Edit()
+		{
+			return View();
+		}
+
+		public ActionResult Detail()
+		{
+			return View();
+		}
+
+		public ActionResult Delete()
+		{
+			return View();
 		}
 	}
 }

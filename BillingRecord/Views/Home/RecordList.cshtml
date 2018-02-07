@@ -14,6 +14,10 @@
 				<th>類別</th>
 				<th>日期</th>
 				<th>金額</th>
+				@if (ViewBag.EditMode)
+				{
+					<th>管理</th>
+				}
 			</tr>
 			@{var index = 0;}
 			@foreach (var record in Model)
@@ -24,6 +28,14 @@
 										? "blue" : "red")">@record.Type</td>
 					<td>@record.Date.ToString("yyyy.MM.dd")</td>
 					<td>@record.Amount</td>
+					@if (ViewBag.EditMode)
+					{
+						<td>
+							@Html.ActionLink("編輯", "Edit") |
+							@Html.ActionLink("詳情", "Detail") |
+							@Html.ActionLink("刪除", "Delete")
+						</td>
+					}
 				</tr>
 			}
 		</table>
