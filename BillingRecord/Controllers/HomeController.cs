@@ -67,10 +67,31 @@ namespace BillingRecord.Controllers
 			BillingInfoViewModel record = _contentSvc.GetRecord(id);
 			return View(record);
 		}
-
-		public ActionResult Delete()
+		
+		[HttpGet]
+		public ActionResult Delete(Guid? id)
 		{
-			return View();
+			if (id == null)
+			{
+				return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+			}
+			BillingInfoViewModel record = _contentSvc.GetRecord(id);
+			return View(record);
+		}
+
+		[HttpPost]
+		[ActionName("Delete")]
+		[ValidateAntiForgeryToken]
+		public ActionResult DeleteConfirmed(Guid id, string submitBtn)
+		{
+			if (submitBtn == "Delete")
+			{
+				if (_contentSvc.Delete(id))
+				{
+					_contentSvc.Save();
+				}
+			}
+			return RedirectToAction("Manage");
 		}
 	}
 }

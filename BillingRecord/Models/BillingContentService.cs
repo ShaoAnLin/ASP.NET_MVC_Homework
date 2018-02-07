@@ -35,7 +35,7 @@ namespace BillingRecord.Models
 
 		public BillingInfoViewModel GetRecord(Guid? id)
 		{
-			var record = _billingRep.Query(d => d.Id == id).FirstOrDefault();
+			var record = _billingRep.GetSingle(d => d.Id == id);
 			var model = new BillingInfoViewModel
 			{
 				Id = record.Id,
@@ -78,6 +78,17 @@ namespace BillingRecord.Models
 		public void Save()
 		{
 			_unitOfWork.Save();
+		}
+
+		public bool Delete(Guid id)
+		{
+			var record = _billingRep.GetSingle(d => d.Id == id);
+			if (record != null)
+			{
+				_billingRep.Remove(record);
+				return true;
+			}
+			return false;
 		}
 	}
 }

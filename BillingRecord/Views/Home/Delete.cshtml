@@ -1,7 +1,36 @@
-﻿
+﻿@model BillingRecord.Models.ViewModels.BillingInfoViewModel
+
 @{
-    ViewBag.Title = "Delete";
+	ViewBag.Title = "Delete";
 }
 
-<h2>Delete</h2>
+<h2>確定要刪除這筆資料？</h2>
 
+<div>
+	<dl class="dl-horizontal">
+		<dt>@Html.DisplayNameFor(model => model.Id)</dt>
+		<dd>@Html.DisplayFor(model => model.Id)</dd>
+
+		<dt>@Html.DisplayNameFor(model => model.Type)</dt>
+		<dd>@Html.DisplayFor(model => model.Type)</dd>
+
+		<dt>@Html.DisplayNameFor(model => model.Amount)</dt>
+		<dd>@Html.DisplayFor(model => model.Amount)</dd>
+
+		<dt>@Html.DisplayNameFor(model => model.Date)</dt>
+		<dd>@Html.DisplayFor(model => model.Date)</dd>
+
+		<dt>@Html.DisplayNameFor(model => model.Message)</dt>
+		<dd>@Html.DisplayFor(model => model.Message)</dd>
+	</dl>
+</div>
+<p>
+	@using (Html.BeginForm("Delete", "Home", FormMethod.Post))
+	{
+		@Html.AntiForgeryToken()
+		<div class="form-actions no-color">
+			<input type="submit" value="Delete" class="btn btn-default" name="submitBtn" />
+			<input type="submit" value="Cancel" class="btn btn-default" name="submitBtn" />
+		</div>
+	}
+</p>

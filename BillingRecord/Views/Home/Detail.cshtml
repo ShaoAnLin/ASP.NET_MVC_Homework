@@ -25,7 +25,7 @@
 	</dl>
 </div>
 <p>
-	@Html.ActionLink("編輯", "Edit") |
-	@Html.ActionLink("刪除", "Delete") |
-	@Html.ActionLink("回列表", "Manage")
+	@Html.ActionLink("編輯", "Edit", new { area = "" }) |
+	@Html.ActionLink("刪除", "Delete", new { area = "", id = Model.Id }) |
+	@Html.ActionLink("回列表", "Manage", new { area = "" })
 </p>

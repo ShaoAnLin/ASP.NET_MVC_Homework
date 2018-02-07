@@ -33,7 +33,7 @@
 						<td>
 							@Html.ActionLink("編輯", "Edit") |
 							@Html.ActionLink("詳情", "Detail", new { id = record.Id }) |
-							@Html.ActionLink("刪除", "Delete")
+							@Html.ActionLink("刪除", "Delete", new { id = record.Id })
 						</td>
 					}
 				</tr>
