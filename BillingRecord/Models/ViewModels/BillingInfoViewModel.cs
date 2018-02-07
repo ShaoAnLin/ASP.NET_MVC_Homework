@@ -15,6 +15,8 @@ namespace BillingRecord.Models.ViewModels
 			Income = 1
 		}
 
+		public Guid Id { get; set; }
+
 		[Display(Name = "類別")]
 		public BillingType Type { get; set; }
 

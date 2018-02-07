@@ -1,7 +1,31 @@
-﻿
+﻿@model BillingRecord.Models.ViewModels.BillingInfoViewModel
+
 @{
-    ViewBag.Title = "Detail";
+	ViewBag.Title = "Detail";
 }
 
-<h2>Detail</h2>
+<h2>收支明細</h2>
 
+<div>
+	<dl class="dl-horizontal">
+		<dt>@Html.DisplayNameFor(model => model.Id)</dt>
+		<dd>@Html.DisplayFor(model => model.Id)</dd>
+
+		<dt>@Html.DisplayNameFor(model => model.Type)</dt>
+		<dd>@Html.DisplayFor(model => model.Type)</dd>
+
+		<dt>@Html.DisplayNameFor(model => model.Amount)</dt>
+		<dd>@Html.DisplayFor(model => model.Amount)</dd>
+
+		<dt>@Html.DisplayNameFor(model => model.Date)</dt>
+		<dd>@Html.DisplayFor(model => model.Date)</dd>
+
+		<dt>@Html.DisplayNameFor(model => model.Message)</dt>
+		<dd>@Html.DisplayFor(model => model.Message)</dd>
+	</dl>
+</div>
+<p>
+	@Html.ActionLink("編輯", "Edit") |
+	@Html.ActionLink("刪除", "Delete") |
+	@Html.ActionLink("回列表", "Manage")
+</p>

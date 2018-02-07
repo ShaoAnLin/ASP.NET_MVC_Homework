@@ -4,6 +4,7 @@ using ServiceLab.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 
@@ -57,9 +58,14 @@ namespace BillingRecord.Controllers
 			return View();
 		}
 
-		public ActionResult Detail()
+		public ActionResult Detail(Guid? id)
 		{
-			return View();
+			if (id == null)
+			{
+				return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+			}
+			BillingInfoViewModel record = _contentSvc.GetRecord(id);
+			return View(record);
 		}
 
 		public ActionResult Delete()

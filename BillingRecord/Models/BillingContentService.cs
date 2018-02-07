@@ -23,12 +23,27 @@ namespace BillingRecord.Models
 		{
 			var model = _billingRep.LookupAll().OrderByDescending(d => d.Dateee).Take(num).Select(d => new BillingInfoViewModel()
 			{
+				Id = d.Id,
 				Type = (BillingType)d.Categoryyy,
 				Amount = d.Amounttt,
 				Date = d.Dateee,
 				Message = d.Remarkkk
 			}).ToList();
 
+			return model;
+		}
+
+		public BillingInfoViewModel GetRecord(Guid? id)
+		{
+			var record = _billingRep.Query(d => d.Id == id).FirstOrDefault();
+			var model = new BillingInfoViewModel
+			{
+				Id = record.Id,
+				Type = (BillingType)record.Categoryyy,
+				Amount = record.Amounttt,
+				Date = record.Dateee,
+				Message = record.Remarkkk
+			};
 			return model;
 		}
 
