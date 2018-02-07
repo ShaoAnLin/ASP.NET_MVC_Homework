@@ -1,7 +1,18 @@
-﻿
+﻿@model BillingRecord.Models.ViewModels.BillingInfoViewModel
+
 @{
-    ViewBag.Title = "Edit";
+	ViewBag.Title = "Edit";
 }
 
-<h2>Edit</h2>
+<h2>修改資料</h2>
 
+@using (Html.BeginForm())
+{
+	@Html.AntiForgeryToken()
+	@Html.ValidationSummary(true)
+	@Html.Partial("_BillingForm")
+}
+
+<p>
+	@Html.ActionLink("回列表", "Manage", new { area = "" })
+</p>

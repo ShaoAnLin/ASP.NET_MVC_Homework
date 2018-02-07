@@ -274,6 +274,7 @@
     <Content Include="Views\Home\Edit.cshtml" />
     <Content Include="Views\Home\Detail.cshtml" />
     <Content Include="Views\Home\Delete.cshtml" />
+    <Content Include="Views\Shared\_BillingForm.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\Validate\" />

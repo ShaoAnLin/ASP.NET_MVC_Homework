@@ -23,6 +23,7 @@ namespace BillingRecord.Controllers
 
 		public ActionResult Index()
 		{
+			ViewBag.EditMode = false;
 			return View(new BillingInfoViewModel());
 		}
 		
@@ -53,12 +54,25 @@ namespace BillingRecord.Controllers
 			return View();
 		}
 
-		public ActionResult Edit()
+		public ActionResult Edit(Guid? id)
 		{
-			return View();
+			if (id == null)
+			{
+				return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+			}
+			BillingInfoViewModel record = _contentSvc.GetRecord(id);
+			return View(record);
 		}
 
-		public ActionResult Detail(Guid? id)
+		[HttpPost]
+		[ActionName("Edit")]
+		[ValidateAntiForgeryToken]
+		public ActionResult EditConfirmed(BillingInfoViewModel model)
+		{
+			return Content("");
+		}
+
+			public ActionResult Detail(Guid? id)
 		{
 			if (id == null)
 			{
@@ -68,7 +82,6 @@ namespace BillingRecord.Controllers
 			return View(record);
 		}
 		
-		[HttpGet]
 		public ActionResult Delete(Guid? id)
 		{
 			if (id == null)

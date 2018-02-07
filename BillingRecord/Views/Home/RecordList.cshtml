@@ -14,7 +14,7 @@
 				<th>類別</th>
 				<th>日期</th>
 				<th>金額</th>
-				@if (ViewBag.EditMode)
+				@if (ViewBag.EditMode != null && ViewBag.EditMode)
 				{
 					<th>管理</th>
 				}
@@ -28,12 +28,12 @@
 										? "blue" : "red")">@record.Type</td>
 					<td>@record.Date.ToString("yyyy.MM.dd")</td>
 					<td>@record.Amount</td>
-					@if (ViewBag.EditMode)
+					@if (ViewBag.EditMode != null && ViewBag.EditMode)
 					{
 						<td>
-							@Html.ActionLink("編輯", "Edit") |
-							@Html.ActionLink("詳情", "Detail", new { id = record.Id }) |
-							@Html.ActionLink("刪除", "Delete", new { id = record.Id })
+							@Html.ActionLink("編輯", "Edit", new { area = "", id = record.Id }) |
+							@Html.ActionLink("詳情", "Detail", new { area = "", id = record.Id }) |
+							@Html.ActionLink("刪除", "Delete", new { area = "", id = record.Id })
 						</td>
 					}
 				</tr>
