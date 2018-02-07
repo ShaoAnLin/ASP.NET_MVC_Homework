@@ -12,13 +12,13 @@ namespace BillingRecord.Areas.Login
             }
         }
 
-        public override void RegisterArea(AreaRegistrationContext context) 
-        {
-            context.MapRoute(
+        public override void RegisterArea(AreaRegistrationContext context)
+		{
+			context.MapRoute(
                 "Login_default",
                 "Login/{controller}/{action}/{id}",
-                new { controller = "Home", action = "Index", id = UrlParameter.Optional }
-            );
+				defaults: new { controller = "Account", action = "Login", id = UrlParameter.Optional }
+			);
         }
     }
 }

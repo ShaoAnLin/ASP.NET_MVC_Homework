@@ -179,7 +179,6 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
-    <Compile Include="Areas\Login\Controllers\HomeController.cs" />
     <Compile Include="Areas\Login\Startup.cs" />
     <Compile Include="Areas\Login\Controllers\AccountController.cs" />
     <Compile Include="Areas\Login\Controllers\ManageController.cs" />
@@ -245,7 +244,6 @@
     <Content Include="Areas\Login\Views\Manage\SetPassword.cshtml" />
     <Content Include="Areas\Login\Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Areas\Login\Views\_ViewStart.cshtml" />
-    <Content Include="Areas\Login\Views\Home\Index.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
