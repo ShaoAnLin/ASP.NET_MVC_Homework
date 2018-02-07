@@ -90,5 +90,24 @@ namespace BillingRecord.Models
 			}
 			return false;
 		}
+
+		public bool Edit(BillingInfoViewModel model)
+		{
+			var record = _billingRep.GetSingle(d => d.Id == model.Id);
+			if (record != null)
+			{
+				_billingRep.Remove(record);
+				_billingRep.Create(new AccountBook
+				{
+					Id = model.Id,
+					Categoryyy = (int)model.Type,
+					Amounttt = model.Amount,
+					Dateee = model.Date,
+					Remarkkk = model.Message
+				});
+				return true;
+			}
+			return false;
+		}
 	}
 }

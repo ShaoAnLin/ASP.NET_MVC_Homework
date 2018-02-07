@@ -69,7 +69,11 @@ namespace BillingRecord.Controllers
 		[ValidateAntiForgeryToken]
 		public ActionResult EditConfirmed(BillingInfoViewModel model)
 		{
-			return Content("");
+			if (_contentSvc.Edit(model))
+			{
+				_contentSvc.Save();
+			}
+			return RedirectToAction("Manage");
 		}
 
 			public ActionResult Detail(Guid? id)
