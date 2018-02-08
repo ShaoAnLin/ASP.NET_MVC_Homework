@@ -20,7 +20,10 @@
             </div>
 			<div class="navbar-collapse collapse">
 				<ul class="nav navbar-nav">
-					<li>@Html.ActionLink("新增收支", "Index", "Home", new { area = "" }, null)</li>
+					@if (Request.IsAuthenticated)
+					{
+						<li>@Html.ActionLink("新增收支", "Index", "Home", new { area = "" }, null)</li>
+					}
 					@if (User.IsInRole("Admin"))
 					{
 						<li>@Html.ActionLink("編輯紀錄", "Manage", "Home", new { area = "" }, null)</li>

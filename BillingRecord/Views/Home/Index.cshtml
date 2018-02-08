@@ -3,16 +3,21 @@
 }
 @model BillingRecord.Models.ViewModels.BillingInfoViewModel
 
-@using (Ajax.BeginForm(new AjaxOptions
+@if (Request.IsAuthenticated)
 {
-	UpdateTargetId = "ajax",
-	Url = Url.Action("Create", "Home")
-}))
-{
-	@Html.AntiForgeryToken()
-	@Html.ValidationSummary(true)
-	@Html.Partial("_BillingForm")
+	using (Ajax.BeginForm(new AjaxOptions
+	{
+		UpdateTargetId = "ajax",
+		Url = Url.Action("Create", "Home")
+	}))
+	{
+		@Html.AntiForgeryToken()
+		@Html.ValidationSummary(true)
+		@Html.Partial("_BillingForm")
+	}
 }
+
+<h2>記賬紀錄</h2>
 
 <div id="ajax">
 	@Html.Action("RecordList")
