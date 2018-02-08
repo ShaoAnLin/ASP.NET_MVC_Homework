@@ -49,11 +49,13 @@ namespace BillingRecord.Controllers
 			return View(_contentSvc.GetRecords());
 		}
 
+		[Authorize(Roles = "Admin")]
 		public ActionResult Manage()
 		{
 			return View();
 		}
 
+		[Authorize(Roles = "Admin")]
 		public ActionResult Edit(Guid? id)
 		{
 			if (id == null)
@@ -64,6 +66,7 @@ namespace BillingRecord.Controllers
 			return View(record);
 		}
 
+		[Authorize(Roles = "Admin")]
 		[HttpPost]
 		[ActionName("Edit")]
 		[ValidateAntiForgeryToken]
@@ -85,7 +88,8 @@ namespace BillingRecord.Controllers
 			BillingInfoViewModel record = _contentSvc.GetRecord(id);
 			return View(record);
 		}
-		
+
+		[Authorize(Roles = "Admin")]
 		public ActionResult Delete(Guid? id)
 		{
 			if (id == null)
@@ -96,6 +100,7 @@ namespace BillingRecord.Controllers
 			return View(record);
 		}
 
+		[Authorize(Roles = "Admin")]
 		[HttpPost]
 		[ActionName("Delete")]
 		[ValidateAntiForgeryToken]

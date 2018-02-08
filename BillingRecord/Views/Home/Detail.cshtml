@@ -25,7 +25,14 @@
 	</dl>
 </div>
 <p>
-	@Html.ActionLink("編輯", "Edit", new { area = "" }) |
-	@Html.ActionLink("刪除", "Delete", new { area = "", id = Model.Id }) |
-	@Html.ActionLink("回列表", "Manage", new { area = "" })
+	@if (User.IsInRole("Admin"))
+	{
+		@Html.ActionLink("編輯", "Edit", new { area = "", id = Model.Id }) @:|
+		@Html.ActionLink("刪除", "Delete", new { area = "", id = Model.Id }) @:|
+		@Html.ActionLink("回列表", "Manage", new { area = "" })
+	}
+	else
+	{
+		@Html.ActionLink("回首頁", "Index", new { area = "" })
+	}
 </p>
