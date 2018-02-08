@@ -9,6 +9,8 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using BillingRecord.Models;
+using System.Web.Security;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace BillingRecord.Areas.Login.Controllers
 {
@@ -155,7 +157,22 @@ namespace BillingRecord.Areas.Login.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
+					if (user.UserName == "admin@admin.com")
+					{
+						var currentUser = UserManager.FindByName(user.UserName);
+
+						var adminRole = "Admin";
+						var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(new ApplicationDbContext()));
+						bool adminRoleExists = await roleManager.RoleExistsAsync(adminRole);
+						if (!adminRoleExists)
+						{
+							IdentityResult roleResult = await roleManager.CreateAsync(new IdentityRole(adminRole));
+						}
+
+						UserManager.AddToRole(currentUser.Id, adminRole);
+					}
+
+					await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
                     
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
