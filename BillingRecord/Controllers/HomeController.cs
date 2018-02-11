@@ -21,6 +21,7 @@ namespace BillingRecord.Controllers
 			_contentSvc = new BillingContentService(_unitOfWork);
 		}
 
+		[Route("~/skilltree")]
 		public ActionResult Index()
 		{
 			ViewBag.EditMode = false;
