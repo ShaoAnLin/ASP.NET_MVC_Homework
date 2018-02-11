@@ -21,6 +21,7 @@ namespace BillingRecord.Controllers
 			_contentSvc = new BillingContentService(_unitOfWork);
 		}
 
+		[Route("")]
 		[Route("~/skilltree")]
 		public ActionResult Index()
 		{
@@ -115,6 +116,24 @@ namespace BillingRecord.Controllers
 				}
 			}
 			return RedirectToAction("Manage");
+		}
+
+		[Route("~/skilltree/{year:length(4)}/{month:length(2)}")]
+		public ActionResult MonthRecord(string year, string month)
+		{
+			ViewBag.Year = year;
+			ViewBag.Month = month;
+			return View();
+		}
+
+		public ActionResult GetMonthRecords(string year, string month)
+		{
+			var records = _contentSvc.GetRecords(int.Parse(year), int.Parse(month));
+			if (records.Any())
+			{
+				return View("RecordList", records);
+			}
+			return Content("沒有明細");
 		}
 	}
 }

@@ -1,0 +1,8 @@
+﻿
+@{
+	ViewBag.Title = "MonthRecord";
+}
+
+<h2>@(ViewBag.Year)年@(ViewBag.Month)月 明細</h2>
+
+@Html.Action("GetMonthRecords", new {year = ViewBag.Year, month = ViewBag.Month})

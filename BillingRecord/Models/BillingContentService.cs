@@ -33,6 +33,23 @@ namespace BillingRecord.Models
 			return model;
 		}
 
+		public List<BillingInfoViewModel> GetRecords(int year, int month)
+		{
+			var model = _billingRep
+							.Query(d => d.Dateee.Year == year && d.Dateee.Month == month)
+							.ToList()
+							.Select(d => new BillingInfoViewModel()
+			{
+				Id = d.Id,
+				Type = (BillingType)d.Categoryyy,
+				Amount = d.Amounttt,
+				Date = d.Dateee,
+				Message = d.Remarkkk
+			}).ToList();
+
+			return model;
+		}
+
 		public BillingInfoViewModel GetRecord(Guid? id)
 		{
 			var record = _billingRep.GetSingle(d => d.Id == id);
