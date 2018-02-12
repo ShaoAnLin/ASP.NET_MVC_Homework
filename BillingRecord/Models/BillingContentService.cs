@@ -19,9 +19,9 @@ namespace BillingRecord.Models
 			_billingRep = new Repository<AccountBook>(unitOfWork);
 		}
 
-		public List<BillingInfoViewModel> GetRecords(int num = 100)
+		public List<BillingInfoViewModel> GetRecords()
 		{
-			var model = _billingRep.LookupAll().OrderByDescending(d => d.Dateee).Take(num).Select(d => new BillingInfoViewModel()
+			var model = _billingRep.LookupAll().OrderByDescending(d => d.Dateee).Select(d => new BillingInfoViewModel()
 			{
 				Id = d.Id,
 				Type = (BillingType)d.Categoryyy,

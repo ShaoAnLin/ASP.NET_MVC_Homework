@@ -4,7 +4,14 @@
 }
 
 @using BillingRecord.Models.ViewModels
-@model List<BillingInfoViewModel>
+@using PagedList.Mvc
+@using PagedList
+
+@{
+	var editMode = ViewBag.EditMode != null && ViewBag.EditMode;
+}
+
+<link href="/Content/PagedList.css" rel="stylesheet" type="text/css" />
 
 <div class="row">
 	<div class="col-md-12">
@@ -20,7 +27,7 @@
 				}
 			</tr>
 			@{var index = 0;}
-			@foreach (var record in Model)
+			@foreach (var record in ViewBag.OnePageOfProducts)
 			{
 				<tr>
 					<td>@(++index)</td>
@@ -28,7 +35,7 @@
 										? "blue" : "red")">@record.Type</td>
 					<td>@record.Date.ToString("yyyy.MM.dd")</td>
 					<td>@record.Amount</td>
-					@if (ViewBag.EditMode != null && ViewBag.EditMode)
+					@if (editMode)
 					{
 						<td>
 							@Html.ActionLink("編輯", "Edit", new { area = "", id = record.Id }) |
@@ -41,3 +48,4 @@
 		</table>
 	</div>
 </div>
+@Html.PagedListPager((IPagedList)ViewBag.OnePageOfProducts, page => Url.Action(editMode ? "Manage" : "Index", new { page }))

@@ -7,6 +7,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using PagedList;
 
 namespace BillingRecord.Controllers
 {
@@ -45,10 +46,17 @@ namespace BillingRecord.Controllers
 		}
 
 		[ChildActionOnly]
-		public ActionResult RecordList(bool editMode = false)
+		public ActionResult RecordList(int? page, bool editMode = false)
 		{
 			ViewBag.EditMode = editMode;
-			return View(_contentSvc.GetRecords());
+
+			const int itemsPerPage = 10;
+			var records = _contentSvc.GetRecords();
+			var pageIdx = page ?? 1;
+			var onePageOfProducts = records.ToPagedList(pageIdx, itemsPerPage);
+
+			ViewBag.OnePageOfProducts = onePageOfProducts;
+			return View();
 		}
 
 		[Authorize(Roles = "Admin")]
