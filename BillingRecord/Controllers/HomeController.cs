@@ -28,7 +28,7 @@ namespace BillingRecord.Controllers
 		public ActionResult Index()
 		{
 			ViewBag.EditMode = false;
-			return View();
+			return View(new SearchRecordViewModel());
 		}
 		
 		public ActionResult Create()
@@ -133,25 +133,41 @@ namespace BillingRecord.Controllers
 			return RedirectToAction("Manage");
 		}
 
+		[HttpGet]
 		[Route("~/skilltree/{year:length(4)}/{month:length(2)}")]
 		public ActionResult MonthRecord(string year, string month, int? page)
 		{
-			ViewBag.Year = year;
-			ViewBag.Month = month;
-			ViewBag.Page = page;
-			return View();
+			if (int.TryParse(year, out int yearResult) && int.TryParse(month, out int monResult))
+			{
+				return MonthRecord(new SearchRecordViewModel()
+				{
+					Year = yearResult,
+					Month = monResult,
+					Page = page
+				});
+			}
+			else
+			{
+				return RedirectToAction("Index", "Home");
+			}
 		}
 
-		public ActionResult GetMonthRecords(string year, string month, int? page)
+		public ActionResult MonthRecord(SearchRecordViewModel model)
 		{
-			int pageIdx = page ?? 1;
-			var records = _contentSvc.GetRecords(int.Parse(year), int.Parse(month));
+			return View(model);
+		}
+
+		public ActionResult GetMonthRecords(SearchRecordViewModel model)
+		{
+			int pageIdx = model.Page ?? 1;
+			var records = _contentSvc.GetRecords(model.Year, model.Month);
 
 			if (records.Any())
 			{
 				var onePageOfRecords = records.ToPagedList(pageIdx, _itemsPerPage);
 				ViewBag.OnePageOfProducts = onePageOfRecords;
 				ViewBag.MonthRecord = true;
+				ViewBag.SearchRecord = model;
 				return View("RecordList", records);
 			}
 			return Content("沒有明細");

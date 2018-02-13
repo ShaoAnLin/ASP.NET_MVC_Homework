@@ -50,7 +50,12 @@
 </div>
 @if (ViewBag.MonthRecord != null && ViewBag.MonthRecord)
 {
-	@Html.PagedListPager((IPagedList)ViewBag.OnePageOfProducts, page => Url.Action("MonthRecord", new { page }))
+	@Html.PagedListPager((IPagedList)ViewBag.OnePageOfProducts, page => Url.Action("MonthRecord", new SearchRecordViewModel()
+	{
+		Year = ((SearchRecordViewModel)ViewBag.SearchRecord).Year,
+		Month = ((SearchRecordViewModel)ViewBag.SearchRecord).Month,
+		Page = page
+	}))
 }
 else
 {
