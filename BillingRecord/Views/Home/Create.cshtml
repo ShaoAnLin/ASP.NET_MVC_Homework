@@ -1,0 +1,13 @@
+﻿
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>新增支出</h2>
+
+@using (Html.BeginForm())
+{
+	@Html.AntiForgeryToken()
+	@Html.ValidationSummary(true)
+	@Html.Partial("_BillingForm")
+}

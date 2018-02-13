@@ -22,7 +22,7 @@
 				<ul class="nav navbar-nav">
 					@if (Request.IsAuthenticated)
 					{
-						<li>@Html.ActionLink("新增收支", "Index", "Home", new { area = "" }, null)</li>
+						<li>@Html.ActionLink("新增收支", "Create", "Home", new { area = "" }, null)</li>
 					}
 					@if (User.IsInRole("Admin"))
 					{

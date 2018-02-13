@@ -28,11 +28,18 @@ namespace BillingRecord.Controllers
 		public ActionResult Index()
 		{
 			ViewBag.EditMode = false;
-			return View(new BillingInfoViewModel());
+			return View();
 		}
 		
+		public ActionResult Create()
+		{
+			return View(new BillingInfoViewModel());
+		}
+
 		[HttpPost]
-		public ActionResult Create(BillingInfoViewModel model)
+		[ActionName("Create")]
+		[ValidateAntiForgeryToken]
+		public ActionResult CreateConfirmed(BillingInfoViewModel model)
 		{
 			if (ModelState.IsValid)
 			{
@@ -40,7 +47,7 @@ namespace BillingRecord.Controllers
 				{
 					_contentSvc.Add(model);
 					_contentSvc.Save();
-					return View("RecordList", _contentSvc.GetRecords());
+					return RedirectToAction("Index");
 				}
 			}
 			return View(model);

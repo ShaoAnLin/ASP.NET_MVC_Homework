@@ -290,6 +290,7 @@
     <Content Include="Views\Home\Delete.cshtml" />
     <Content Include="Views\Shared\_BillingForm.cshtml" />
     <Content Include="Views\Home\MonthRecord.cshtml" />
+    <Content Include="Views\Home\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\Validate\" />
