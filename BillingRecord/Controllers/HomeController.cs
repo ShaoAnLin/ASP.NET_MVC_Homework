@@ -15,6 +15,7 @@ namespace BillingRecord.Controllers
 	{
 		private readonly EFUnitOfWork _unitOfWork;
 		private readonly BillingContentService _contentSvc;
+		private const int _itemsPerPage = 10;
 
 		public HomeController()
 		{
@@ -50,10 +51,9 @@ namespace BillingRecord.Controllers
 		{
 			ViewBag.EditMode = editMode;
 
-			const int itemsPerPage = 10;
 			var records = _contentSvc.GetRecords();
-			var pageIdx = page ?? 1;
-			var onePageOfProducts = records.ToPagedList(pageIdx, itemsPerPage);
+			int pageIdx = page ?? 1;
+			var onePageOfProducts = records.ToPagedList(pageIdx, _itemsPerPage);
 
 			ViewBag.OnePageOfProducts = onePageOfProducts;
 			return View();
@@ -127,18 +127,24 @@ namespace BillingRecord.Controllers
 		}
 
 		[Route("~/skilltree/{year:length(4)}/{month:length(2)}")]
-		public ActionResult MonthRecord(string year, string month)
+		public ActionResult MonthRecord(string year, string month, int? page)
 		{
 			ViewBag.Year = year;
 			ViewBag.Month = month;
+			ViewBag.Page = page;
 			return View();
 		}
 
-		public ActionResult GetMonthRecords(string year, string month)
+		public ActionResult GetMonthRecords(string year, string month, int? page)
 		{
+			int pageIdx = page ?? 1;
 			var records = _contentSvc.GetRecords(int.Parse(year), int.Parse(month));
+
 			if (records.Any())
 			{
+				var onePageOfRecords = records.ToPagedList(pageIdx, _itemsPerPage);
+				ViewBag.OnePageOfProducts = onePageOfRecords;
+				ViewBag.MonthRecord = true;
 				return View("RecordList", records);
 			}
 			return Content("沒有明細");

@@ -48,4 +48,11 @@
 		</table>
 	</div>
 </div>
-@Html.PagedListPager((IPagedList)ViewBag.OnePageOfProducts, page => Url.Action(editMode ? "Manage" : "Index", new { page }))
+@if (ViewBag.MonthRecord != null && ViewBag.MonthRecord)
+{
+	@Html.PagedListPager((IPagedList)ViewBag.OnePageOfProducts, page => Url.Action("MonthRecord", new { page }))
+}
+else
+{
+	@Html.PagedListPager((IPagedList)ViewBag.OnePageOfProducts, page => Url.Action(editMode ? "Manage" : "Index", new { page }))
+}
