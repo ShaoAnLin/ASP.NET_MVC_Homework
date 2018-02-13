@@ -33,7 +33,10 @@ namespace BillingRecord.Controllers
 		
 		public ActionResult Create()
 		{
-			return View(new BillingInfoViewModel());
+			return View(new BillingInfoViewModel()
+			{
+				Date = DateTime.Now
+			});
 		}
 
 		[HttpPost]
