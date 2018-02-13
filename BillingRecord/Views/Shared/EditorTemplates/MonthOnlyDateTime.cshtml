@@ -1,0 +1,12 @@
+﻿
+@model DateTime?
+@{
+
+	var value = Model?.ToString("yyyy-MM") ?? "";
+}
+
+@Html.TextBox("", value, new
+{
+	@class = "form-control",
+	data_monthonlydatepicker = "y"
+})

@@ -21,13 +21,13 @@
 				<th>類別</th>
 				<th>日期</th>
 				<th>金額</th>
-				@if (ViewBag.EditMode != null && ViewBag.EditMode)
+				@if (editMode)
 				{
 					<th>管理</th>
 				}
 			</tr>
 			@{var index = 0;}
-			@foreach (var record in ViewBag.OnePageOfProducts)
+			@foreach (var record in ViewBag.OnePageOfRecords)
 			{
 				<tr>
 					<td>@(++index)</td>
@@ -48,16 +48,15 @@
 		</table>
 	</div>
 </div>
-@if (ViewBag.MonthRecord != null && ViewBag.MonthRecord)
+@if (ViewBag.IsMonthRecord != null && ViewBag.IsMonthRecord)
 {
-	@Html.PagedListPager((IPagedList)ViewBag.OnePageOfProducts, page => Url.Action("MonthRecord", new SearchRecordViewModel()
+	@Html.PagedListPager((IPagedList)ViewBag.OnePageOfRecords, page => Url.Action("MonthRecord", new SearchRecordViewModel()
 	{
-		Year = ((SearchRecordViewModel)ViewBag.SearchRecord).Year,
-		Month = ((SearchRecordViewModel)ViewBag.SearchRecord).Month,
+		SearchMonth = ((SearchRecordViewModel)ViewBag.SearchRecord).SearchMonth,
 		Page = page
 	}))
 }
 else
 {
-	@Html.PagedListPager((IPagedList)ViewBag.OnePageOfProducts, page => Url.Action(editMode ? "Manage" : "Index", new { page }))
+	@Html.PagedListPager((IPagedList)ViewBag.OnePageOfRecords, page => Url.Action(editMode ? "Manage" : "Index", new { page }))
 }

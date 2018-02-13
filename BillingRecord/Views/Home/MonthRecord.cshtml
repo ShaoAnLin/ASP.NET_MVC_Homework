@@ -4,6 +4,6 @@
 }
 @model BillingRecord.Models.ViewModels.SearchRecordViewModel
 
-<h2>@(Model.Year)年@(Model.Month)月 明細</h2>
+<h2>@(Model.SearchMonth.Year)年@(Model.SearchMonth.Month)月 明細</h2>
 
 @Html.Action("GetMonthRecords", Model)

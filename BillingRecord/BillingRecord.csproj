@@ -296,6 +296,7 @@
     <Content Include="Views\Home\MonthRecord.cshtml" />
     <Content Include="Views\Home\Create.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\DateTime.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\MonthOnlyDateTime.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

@@ -28,7 +28,10 @@ namespace BillingRecord.Controllers
 		public ActionResult Index()
 		{
 			ViewBag.EditMode = false;
-			return View(new SearchRecordViewModel());
+			return View(new SearchRecordViewModel()
+			{
+				SearchMonth = DateTime.Now
+			});
 		}
 		
 		public ActionResult Create()
@@ -63,9 +66,7 @@ namespace BillingRecord.Controllers
 
 			var records = _contentSvc.GetRecords();
 			int pageIdx = page ?? 1;
-			var onePageOfProducts = records.ToPagedList(pageIdx, _itemsPerPage);
-
-			ViewBag.OnePageOfProducts = onePageOfProducts;
+			ViewBag.OnePageOfRecords = records.ToPagedList(pageIdx, _itemsPerPage);
 			return View();
 		}
 
@@ -140,12 +141,11 @@ namespace BillingRecord.Controllers
 		[Route("~/skilltree/{year:length(4)}/{month:length(2)}")]
 		public ActionResult MonthRecord(string year, string month, int? page)
 		{
-			if (int.TryParse(year, out int yearResult) && int.TryParse(month, out int monResult))
+			if (int.TryParse(year, out int yearResult) && int.TryParse(month, out int monthResult))
 			{
 				return MonthRecord(new SearchRecordViewModel()
 				{
-					Year = yearResult,
-					Month = monResult,
+					SearchMonth = new DateTime(yearResult, monthResult, 1),
 					Page = page
 				});
 			}
@@ -163,13 +163,12 @@ namespace BillingRecord.Controllers
 		public ActionResult GetMonthRecords(SearchRecordViewModel model)
 		{
 			int pageIdx = model.Page ?? 1;
-			var records = _contentSvc.GetRecords(model.Year, model.Month);
+			var records = _contentSvc.GetRecords(model.SearchMonth.Year, model.SearchMonth.Month);
 
 			if (records.Any())
 			{
-				var onePageOfRecords = records.ToPagedList(pageIdx, _itemsPerPage);
-				ViewBag.OnePageOfProducts = onePageOfRecords;
-				ViewBag.MonthRecord = true;
+				ViewBag.OnePageOfRecords = records.ToPagedList(pageIdx, _itemsPerPage);
+				ViewBag.IsMonthRecord = true;
 				ViewBag.SearchRecord = model;
 				return View("RecordList", records);
 			}

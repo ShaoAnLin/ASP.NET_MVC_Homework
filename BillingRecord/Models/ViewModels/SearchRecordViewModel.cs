@@ -9,11 +9,9 @@ namespace BillingRecord.Models.ViewModels
 {
 	public class SearchRecordViewModel
 	{
-		[Display(Name = "年")]
-		public int Year { get; set; }
-
-		[Display(Name = "月")]
-		public int Month { get; set; }
+		[Display(Name = "搜尋歷史紀錄")]
+		[UIHint("MonthOnlyDateTime")]
+		public DateTime SearchMonth { get; set; }
 
 		public int? Page { get; set; }
 	}
